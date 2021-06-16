@@ -1,0 +1,4 @@
+# docs: https://docs.netlify.com/site-deploys/overview/#deploy-contexts
+[context.production]
+  [[context.production.plugins]]
+    package = "@netlify/plugin-sitemap"
