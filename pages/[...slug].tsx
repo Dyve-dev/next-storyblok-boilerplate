@@ -7,7 +7,11 @@ import { ParsedUrlQuery } from "querystring";
 import Storyblok, { useStoryblok } from "../lib/storyblok";
 import DynamicComponent from "../src/components/DynamicComponent";
 
-export default function DynamicPage(props: any) {
+interface IParams extends ParsedUrlQuery {
+  slug: string;
+}
+
+export default function DynamicPage(props: { [k: string]: any }) {
   const story = useStoryblok(props.story);
   return (
     <div className={styles.container}>
@@ -22,7 +26,7 @@ export default function DynamicPage(props: any) {
 
       <main>
         {story
-          ? story.content.body.map((blok) => (
+          ? story.content.body.map((blok: any) => (
               <DynamicComponent blok={blok} key={blok._uid} />
             ))
           : null}
@@ -65,8 +69,9 @@ export const getStaticProps: GetStaticProps = async function (context) {
 export const getStaticPaths: GetStaticPaths = async function () {
   // get all stories inside the pages folder
   let { data } = await Storyblok.get("cdn/links/");
+  console.debug("getStaticPaths", data);
 
-  let paths: ParsedUrlQuery[] = [];
+  let paths: any = [];
   Object.keys(data.links).forEach((linkKey) => {
     // don't generate route for folders or home entry
     if (data.links[linkKey].is_folder || data.links[linkKey].slug === "home") {
@@ -77,7 +82,7 @@ export const getStaticPaths: GetStaticPaths = async function () {
     const slug: string[] = data.links[linkKey].slug.split("/");
 
     // generate page for the slug
-    //@ts-ignore
+
     paths.push({ params: { slug } });
   });
 

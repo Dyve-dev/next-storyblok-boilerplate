@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
+const TOKEN = String(process.env.STORYBLOK_TOKEN) || "";
 export default async function preview(
   req: NextApiRequest,
   res: NextApiResponse
@@ -10,7 +11,7 @@ export default async function preview(
 
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
-  if (req.query.secret !== "MY_SECRET_TOKEN") {
+  if (req.query.secret !== TOKEN) {
     return res.status(401).json({ message: "Invalid token" });
   }
 

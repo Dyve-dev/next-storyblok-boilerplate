@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import StoryblokClient, { Story } from "storyblok-js-client";
+import StoryblokClient, { StoryData } from "storyblok-js-client";
+
+const TOKEN = String(process.env.STORYBLOK_TOKEN);
+console.debug("TOKEN", TOKEN);
 
 const Storyblok = new StoryblokClient({
-  accessToken: "your-preview-token",
+  accessToken: TOKEN,
   cache: {
     clear: "auto",
     type: "memory",
@@ -10,11 +13,15 @@ const Storyblok = new StoryblokClient({
 });
 
 interface StoryblokBridgeInputEvent extends CustomEvent {
-  story: Story;
+  story: StoryData;
   storyId: string;
 }
 
-export function useStoryblok(originalStory: Story, preview?: boolean) {
+export function useStoryblok(
+  originalStory?: StoryData,
+  preview?: boolean,
+  locale?: string
+) {
   let [story, setStory] = useState(originalStory);
 
   // adds the events for updating the visual editor
