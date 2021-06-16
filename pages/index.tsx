@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
+import SvgVercel from "../src/components/icons/Vercel";
+import beachball from "../public/Beach_Ball.jpg";
 
 export default function Home() {
   return (
@@ -20,6 +22,15 @@ export default function Home() {
           Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
         </p>
+        <div className="flex flex-col space-y-4">
+          <p>
+            this Content should be displayed in column if tailwindcss is
+            properly conigured
+          </p>
+          <p>first row</p>
+          <p>second row</p>
+        </div>
+        <Image src={beachball} alt="example" width={300} height={300} />
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
@@ -60,7 +71,7 @@ export default function Home() {
         >
           Powered by{" "}
           <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            <SvgVercel />
           </span>
         </a>
       </footer>
