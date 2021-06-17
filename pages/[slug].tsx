@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 
 // The Storyblok Client & hook
 import Storyblok, { useStoryblok } from "../lib/storyblok";
@@ -7,7 +7,8 @@ import DynamicComponent from "../src/components/DynamicComponent";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 export default function DynamicPage(props: { [k: string]: any }) {
-  const story = useStoryblok(props.story);
+  const story = useStoryblok(props.story, props.preview);
+  console.debug("Dynamic Page props slug", props);
   return (
     <div className={styles.container}>
       <Head>
@@ -17,6 +18,7 @@ export default function DynamicPage(props: { [k: string]: any }) {
 
       <header>
         <h1>{story ? story.name : "My Site"}</h1>
+        <h2>In normal slug [slug]</h2>
       </header>
 
       <main>
@@ -31,6 +33,7 @@ export default function DynamicPage(props: { [k: string]: any }) {
 }
 
 export const getStaticProps: GetStaticProps = async function (context) {
+  console.debug("Context ", context);
   // we need to join the slug on catch all routes
   let slug: string | string[] | undefined;
   if (context.params && context.params.slug) {

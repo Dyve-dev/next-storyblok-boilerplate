@@ -34,9 +34,7 @@ export function useStoryblok(
       const storyblokInstance = new StoryblokBridge();
 
       // reload on Next.js page on save or publish event in the Visual Editor
-      storyblokInstance.on(["change", "published"], () =>
-        location.reload(true)
-      );
+      storyblokInstance.on(["change", "published"], () => location.reload());
 
       // live update the story on input events
       storyblokInstance.on("input", (event: StoryblokBridgeInputEvent) => {

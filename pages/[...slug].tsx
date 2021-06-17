@@ -12,7 +12,8 @@ interface IParams extends ParsedUrlQuery {
 }
 
 export default function DynamicPage(props: { [k: string]: any }) {
-  const story = useStoryblok(props.story);
+  const story = useStoryblok(props.story, props.preview);
+  console.debug("Dynamic Page props ...slug", props);
   return (
     <div className={styles.container}>
       <Head>
@@ -22,6 +23,7 @@ export default function DynamicPage(props: { [k: string]: any }) {
 
       <header>
         <h1>{story ? story.name : "My Site"}</h1>
+        <h2>In catch all slug [...slug]</h2>
       </header>
 
       <main>
@@ -36,6 +38,7 @@ export default function DynamicPage(props: { [k: string]: any }) {
 }
 
 export const getStaticProps: GetStaticProps = async function (context) {
+  console.debug("Context ", context);
   // we need to join the slug on catch all routes
   let slug: string | string[] | undefined;
   if (context.params && context.params.slug) {

@@ -5,6 +5,7 @@ export default async function preview(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.debug("Preview.ts", req.query);
   const { slug = "" } = req.query;
   // get the storyblok params for the bridge to work
   const params = req.url ? req.url.split("?") : [];
