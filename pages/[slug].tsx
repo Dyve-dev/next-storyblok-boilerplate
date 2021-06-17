@@ -44,8 +44,8 @@ export const getStaticProps: GetStaticProps = async function (context) {
     }
   }
 
-  let params: { [k: string]: any } = {
-    version: "draft", // or 'published'
+  const params: { [k: string]: any } = {
+    version: "published",
   };
 
   if (context.preview) {
@@ -81,7 +81,7 @@ export const getStaticPaths: GetStaticPaths = async function () {
 
     // generate page for the slug
 
-    paths.push({ params: { slug } });
+    paths.push({ params: { slug }, igor: "test" });
   });
 
   return {

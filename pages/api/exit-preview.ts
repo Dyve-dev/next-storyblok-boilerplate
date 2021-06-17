@@ -6,11 +6,8 @@ export default async function exit(req: NextApiRequest, res: NextApiResponse) {
   res.clearPreviewData();
 
   // set the cookies to None
-  let cookies: string[] = [];
-  let _cookies = res.getHeader("Set-Cookie") || [];
-  if (!Array.isArray(_cookies)) {
-    cookies = [String(_cookies)];
-  }
+  let cookies = (res.getHeader("Set-Cookie") as string[]) || [];
+
   res.setHeader(
     "Set-Cookie",
     cookies.map((cookie) =>

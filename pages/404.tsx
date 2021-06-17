@@ -1,30 +1,27 @@
 import React from "react";
-import DynamicComponent from "../src/components/DynamicComponent";
+import { GetStaticProps } from "next";
 
-import { useStoryblok } from "../lib/storyblok";
-
+/**
+ * Keep this page static for better performances
+ * @param param0
+ * @returns
+ */
 export default function Page404({ preview, locale, locales }: any) {
-  const enableBridge = true; // load the storyblok bridge everywhere
-  // const enableBridge = preview; // load only inside preview mode
-  const storyLoaded = useStoryblok(undefined, enableBridge, locale);
-
-  let content = <h1>Not found</h1>;
-  if (storyLoaded && storyLoaded.content)
-    content = <DynamicComponent blok={storyLoaded.content} />;
+  let content = <h1>404 - Page not found</h1>;
 
   return <>{content}</>;
 }
 
-export async function getStaticProps({
+export const getStaticProps: GetStaticProps = async function ({
   locale,
   locales,
   preview = false,
-}: any) {
+}) {
   return {
     props: {
-      preview,
-      locale,
-      locales,
+      preview: preview || null,
+      locale: locale || null,
+      locales: locales || null,
     },
   };
-}
+};
