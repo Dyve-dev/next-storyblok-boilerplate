@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import StoryblokClient, { StoryData } from "storyblok-js-client";
 
 const TOKEN = String(process.env.STORYBLOK_TOKEN);
-console.debug("TOKEN", TOKEN);
+console.debug("TOKEN", TOKEN.slice(0, 4));
 
 const Storyblok = new StoryblokClient({
   accessToken: TOKEN,
