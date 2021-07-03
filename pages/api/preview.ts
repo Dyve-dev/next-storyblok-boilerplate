@@ -2,8 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import Storyblok from "../../lib/storyblok";
 
 const TOKEN =
-  String(process.env.STORYBLOK_PREVIEW_TOKEN) ||
-  "some-random-string-here-149578";
+  String(process.env.STORYBLOK_TOKEN) || "some-random-string-here-149578";
 export default async function preview(
   req: NextApiRequest,
   res: NextApiResponse

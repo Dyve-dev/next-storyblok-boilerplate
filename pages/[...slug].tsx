@@ -40,7 +40,7 @@ export default function DynamicPage(props: { [k: string]: any }) {
 export const getStaticProps: GetStaticProps = async function (context) {
   console.debug("Context ", context);
   // we need to join the slug on catch all routes
-  let slug: string | string[] | undefined;
+  let slug: string | string[] = "";
   if (context.params && context.params.slug) {
     if (Array.isArray(context.params.slug)) {
       slug = context.params.slug.join("/");
@@ -81,7 +81,7 @@ export const getStaticPaths: GetStaticPaths = async function () {
       return;
     }
 
-    // get array for slug because of catch all
+    // get array for slug because of catch all dynamic route
     const slug: string[] = data.links[linkKey].slug.split("/");
 
     // generate page for the slug

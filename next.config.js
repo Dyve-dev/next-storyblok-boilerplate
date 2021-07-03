@@ -5,6 +5,10 @@ module.exports = {
    * If using a CDN or a headless cms for image optimization refer to the docs
    * https://nextjs.org/docs/basic-features/image-optimization#configuration
    */
+  domains: [
+    "a.storyblok.com",
+    "img2.storyblok.com"
+  ],
   images: {
     deviceSizes: [420, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
   },
